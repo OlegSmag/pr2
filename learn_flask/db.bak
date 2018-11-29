@@ -1,0 +1,264 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.6 (Ubuntu 10.6-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.6 (Ubuntu 10.6-0ubuntu0.18.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: data; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA data;
+
+
+ALTER SCHEMA data OWNER TO postgres;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: department; Type: TABLE; Schema: data; Owner: postgres
+--
+
+CREATE TABLE data.department (
+    name_dep text,
+    id integer NOT NULL
+);
+
+
+ALTER TABLE data.department OWNER TO postgres;
+
+--
+-- Name: department_id_seq; Type: SEQUENCE; Schema: data; Owner: postgres
+--
+
+CREATE SEQUENCE data.department_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE data.department_id_seq OWNER TO postgres;
+
+--
+-- Name: department_id_seq; Type: SEQUENCE OWNED BY; Schema: data; Owner: postgres
+--
+
+ALTER SEQUENCE data.department_id_seq OWNED BY data.department.id;
+
+
+--
+-- Name: employee; Type: TABLE; Schema: data; Owner: postgres
+--
+
+CREATE TABLE data.employee (
+    name text,
+    sname text,
+    experience integer,
+    salary integer,
+    id_team integer,
+    id integer NOT NULL,
+    "position" text,
+    effectiveness_coefficient text
+);
+
+
+ALTER TABLE data.employee OWNER TO postgres;
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: data; Owner: postgres
+--
+
+CREATE SEQUENCE data.employee_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE data.employee_id_seq OWNER TO postgres;
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: data; Owner: postgres
+--
+
+ALTER SEQUENCE data.employee_id_seq OWNED BY data.employee.id;
+
+
+--
+-- Name: team; Type: TABLE; Schema: data; Owner: postgres
+--
+
+CREATE TABLE data.team (
+    name_team text,
+    id_department integer,
+    id_manager integer,
+    id integer NOT NULL
+);
+
+
+ALTER TABLE data.team OWNER TO postgres;
+
+--
+-- Name: team_id_seq; Type: SEQUENCE; Schema: data; Owner: postgres
+--
+
+CREATE SEQUENCE data.team_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE data.team_id_seq OWNER TO postgres;
+
+--
+-- Name: team_id_seq; Type: SEQUENCE OWNED BY; Schema: data; Owner: postgres
+--
+
+ALTER SEQUENCE data.team_id_seq OWNED BY data.team.id;
+
+
+--
+-- Name: department id; Type: DEFAULT; Schema: data; Owner: postgres
+--
+
+ALTER TABLE ONLY data.department ALTER COLUMN id SET DEFAULT nextval('data.department_id_seq'::regclass);
+
+
+--
+-- Name: employee id; Type: DEFAULT; Schema: data; Owner: postgres
+--
+
+ALTER TABLE ONLY data.employee ALTER COLUMN id SET DEFAULT nextval('data.employee_id_seq'::regclass);
+
+
+--
+-- Name: team id; Type: DEFAULT; Schema: data; Owner: postgres
+--
+
+ALTER TABLE ONLY data.team ALTER COLUMN id SET DEFAULT nextval('data.team_id_seq'::regclass);
+
+
+--
+-- Data for Name: department; Type: TABLE DATA; Schema: data; Owner: postgres
+--
+
+COPY data.department (name_dep, id) FROM stdin;
+DevOps	1
+\.
+
+
+--
+-- Data for Name: employee; Type: TABLE DATA; Schema: data; Owner: postgres
+--
+
+COPY data.employee (name, sname, experience, salary, id_team, id, "position", effectiveness_coefficient) FROM stdin;
+Bob	Fog	2	2000	1	1	Developer	1
+Bill	Dilan	3	3000	1	2	admin	1
+Pall	Reach	7	5000	1	3	Developer	1
+John	Pupkin	3	2000	1	4	Developer	1
+Nick	Born	3	2000	2	5	Manager	1
+Nill	Armstrong	3	2000	2	6	Developer	1
+Leo	Fog	3	2000	2	7	Developer	1
+Leo	Reach	3	2000	2	8	Developer	1
+Pall	Fog	3	2000	2	9	Developer	1
+Bob	Fog	3	2000	2	10	Developer	1
+Bob	Armstrong	3	2000	2	11	Developer	1
+Pall	Armstrong	2	1500	2	12	Designer	0.8
+Bill	Pupkin	1	2000	2	13	Designer	0.5
+\.
+
+
+--
+-- Data for Name: team; Type: TABLE DATA; Schema: data; Owner: postgres
+--
+
+COPY data.team (name_team, id_department, id_manager, id) FROM stdin;
+Server	1	1	1
+Development	1	5	2
+\.
+
+
+--
+-- Name: department_id_seq; Type: SEQUENCE SET; Schema: data; Owner: postgres
+--
+
+SELECT pg_catalog.setval('data.department_id_seq', 1, true);
+
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: data; Owner: postgres
+--
+
+SELECT pg_catalog.setval('data.employee_id_seq', 13, true);
+
+
+--
+-- Name: team_id_seq; Type: SEQUENCE SET; Schema: data; Owner: postgres
+--
+
+SELECT pg_catalog.setval('data.team_id_seq', 2, true);
+
+
+--
+-- Name: department department_pkey; Type: CONSTRAINT; Schema: data; Owner: postgres
+--
+
+ALTER TABLE ONLY data.department
+    ADD CONSTRAINT department_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: data; Owner: postgres
+--
+
+ALTER TABLE ONLY data.employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: team team_pkey; Type: CONSTRAINT; Schema: data; Owner: postgres
+--
+
+ALTER TABLE ONLY data.team
+    ADD CONSTRAINT team_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Representation for employee</title>
+    </head>
+    <body>
+        <ol>
+        {% for i in a %}
+        <li>{{i[0]}} {{i[1]}}, manager: {{i[2]}}, experience: {{i[3]}}</li>
+    </br>
+        {% endfor %}
+        </ol>
+    </body>
+</html>
