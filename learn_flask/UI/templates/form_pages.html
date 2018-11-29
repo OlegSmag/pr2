@@ -1,0 +1,38 @@
+<!doctype html>
+<title>Hello from Flask</title>
+<style type="text/css">p {margin-left: 10px;} input{margin-left: 20px;}</style>
+<style type="text/css">input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {-webkit-appearance: none; margin: 0;}</style>
+<body>
+<a href="/salary">Salaries</a></br>
+<a href="/repr_employee">Representation for employee</a>
+
+    <h2>Please, enter your data.</h2>
+    <div>
+      <form method="post" action="/add_data">
+        <p>Name of department</br>
+          <input type="text" name="name_of_department"></p>
+        <p>Name of team</br>
+          <input type="text" name="name_of_team"></p>
+        <p>Department ID</br>
+          <input type="number" name="department_id"></p>
+        <p>Manager ID</br>
+          <input type="number" name="manager_id"></p>
+        <p>First name</br>
+          <input type="text" name="first_name"></p>
+        <p>Surname</br>
+          <input type="text" name="surname"></p>
+        <p>Experience</br>
+          <input type="number" name="experience"></p>
+        <p>Salary</br>
+          <input type="number" name="salary"></p>
+        <p>Effectiveness coefficient</br>
+          <input type="number" name="effectiveness_coefficient" step="0.1"></p>
+        <p>Position</br>
+          <input type="text" name="position"></p>
+        <p>Team ID</br>
+          <input type="number" name="team_id"></p>
+        <p><button type="submit">Send</button></p>
+	  </form>
+	</div>
+
+</body>
